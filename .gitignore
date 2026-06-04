@@ -1,0 +1,15 @@
+# 字體：源石黑體 GenSekiGothic2TW 體積大（~130MB），不入庫；線上版 teaching.html fallback Noto Sans TC。
+# 重現影片請自 github.com/ButTaiwan/genseki-font 下載 H/B/M 三檔放回各 videos/*/assets/fonts/
+*.otf
+
+# 影片渲染中間檔（可重新生成）；保留各 videos/*/final.mp4（teaching.html 直接嵌入播放）
+videos/**/renders/
+videos/**/assets/narration/
+
+# Python 快取
+__pycache__/
+*.pyc
+
+# 系統檔
+.DS_Store
+Thumbs.db

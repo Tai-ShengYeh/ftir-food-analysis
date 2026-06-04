@@ -1,0 +1,9 @@
+n_arabica=29
+n_robusta=27
+best_LV=2
+best_cv_acc=100.0%
+acc_1LV=98.2%
+arabica_recall=100.0%
+robusta_recall=100.0%
+confusion=[[29,0],[0,27]]
+top_bands_cm-1=1007, 957, 1011, 903

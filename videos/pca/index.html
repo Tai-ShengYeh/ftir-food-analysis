@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<title>FTIR 咖啡 PCA 教學影片</title>
+<script>window.onerror=function(m,s,l,c,e){console.error("SYNTAX ERROR:",m,"at",s,"line",l);return false;};</script>
+<style>
+  @font-face{font-family:'GenSeki TW';src:url('assets/fonts/GenSekiGothic2TW-M.otf') format('opentype');font-weight:500;font-display:block;}
+  @font-face{font-family:'GenSeki TW';src:url('assets/fonts/GenSekiGothic2TW-B.otf') format('opentype');font-weight:700;font-display:block;}
+  @font-face{font-family:'GenSeki TW';src:url('assets/fonts/GenSekiGothic2TW-H.otf') format('opentype');font-weight:900;font-display:block;}
+  :root{
+    --paper:#FFFFFF; --paper2:#F2EDDC; --ink:#1A1A1A; --ink-soft:#4a4334;
+    --teal:#0E7C7B; --coral:#E36414; --gold:#C8941F; --gold-lt:#FFDE7A; --cover:#119C9A; --line:#D9D2BE;
+    --fs-title:70px; --fs-hero:clamp(86px,7vw,134px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:100%;height:100%;background:var(--ink);color:var(--ink);font-family:'GenSeki TW',sans-serif;overflow:hidden;user-select:none;}
+  svg g{transform-box:fill-box;transform-origin:center;}
+  .stage{position:fixed;inset:0;}
+  .slide{position:absolute;inset:0;opacity:0;padding:64px 90px 150px;background:var(--paper);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;
+    transition:opacity .6s ease-in-out;pointer-events:none;z-index:1;}
+  .slide.active{opacity:1;pointer-events:auto;z-index:2;}
+  .slide.cover{background:var(--cover);color:#fff;align-items:center;justify-content:center;text-align:center;padding:80px;}
+  .slide-title{font-weight:900;font-size:var(--fs-title);color:var(--ink);line-height:1.12;border-left:12px solid var(--teal);padding-left:26px;margin-bottom:10px;}
+  .kick{font-weight:900;font-size:24px;letter-spacing:.12em;color:var(--coral);margin-bottom:8px;padding-left:28px;}
+  .chapter-chip{position:absolute;top:34px;right:40px;font-size:20px;font-weight:700;color:rgba(26,26,26,.5);z-index:5;}
+  .chapter-chip span{background:var(--teal);color:#fff;padding:3px 12px;border-radius:5px;font-weight:900;margin-right:8px;}
+  .slide.cover .chapter-chip{color:rgba(255,255,255,.7);} .slide.cover .chapter-chip span{background:rgba(255,255,255,.18);}
+  .progress-bar{position:absolute;left:0;bottom:0;height:8px;background:linear-gradient(90deg,var(--teal),var(--gold-lt));width:0%;transition:width .1s linear;z-index:99;}
+  .subtitle-container{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);width:86%;max-width:1560px;padding:14px 30px;border-radius:12px;background:rgba(26,26,26,.92);color:#fff;font-weight:700;font-size:30px;line-height:1.4;text-align:center;box-shadow:0 6px 22px rgba(0,0,0,.3);z-index:90;}
+  .content-area{width:100%;flex:1;display:flex;align-items:center;justify-content:center;margin-top:6px;}
+  .cover h1{font-weight:900;font-size:var(--fs-hero);line-height:1.16;}
+  .cover .gold{color:var(--gold-lt);} .cover .sub-l2{font-size:44px;color:rgba(255,255,255,.92);margin-top:24px;font-weight:700;}
+  .cover .sig{margin-top:54px;font-size:24px;letter-spacing:.22em;color:rgba(255,255,255,.55);font-weight:700;}
+  .cover .uline{display:inline-block;height:10px;width:0;background:var(--gold-lt);border-radius:6px;margin-top:16px;transition:width 1s ease .3s;}
+  .slide.cover.go .uline{width:300px;}
+  .anim{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1);}
+  .slide.go .anim{opacity:1;transform:none;}
+  .pop{opacity:0;transform:scale(.6);transition:opacity .6s ease,transform .6s cubic-bezier(.175,.885,.32,1.275);}
+  .slide.go .pop{opacity:1;transform:scale(1);}
+  .d1{transition-delay:.2s}.d2{transition-delay:.5s}.d3{transition-delay:.8s}.d4{transition-delay:1.1s}.d5{transition-delay:1.4s}.d6{transition-delay:1.7s}
+  .lead{font-size:32px;color:var(--ink-soft);line-height:1.5;max-width:620px;}
+  .hl{color:var(--teal);font-weight:900;} .hlc{color:var(--coral);font-weight:900;}
+  .figpanel{background:var(--paper2);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 14px 40px rgba(14,124,123,.10);}
+  .figpanel img{display:block;max-height:62vh;max-width:100%;border-radius:12px;}
+  .duo{display:flex;gap:40px;align-items:center;justify-content:center;}
+  .duo figure{background:var(--paper2);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center;}
+  .duo img{display:block;width:560px;max-width:42vw;border-radius:10px;}
+  .duo .cap{margin-top:10px;font-size:26px;font-weight:900;} .duo .cap.a{color:var(--coral);} .duo .cap.b{color:var(--teal);}
+  .legend{display:flex;flex-direction:column;gap:18px;}
+  .lchip{display:flex;align-items:center;gap:16px;background:var(--paper2);border:1px solid var(--line);border-radius:16px;padding:16px 22px;font-size:26px;font-weight:700;}
+  .lchip .dot{width:22px;height:22px;border-radius:50%;flex:none;}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;width:94%;}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:20px;padding:30px 32px;border-top:10px solid var(--teal);}
+  .card.coral{border-top-color:var(--coral);}
+  .card h4{font-size:34px;font-weight:900;color:var(--teal);margin-bottom:10px;} .card.coral h4{color:var(--coral);}
+  .card p{font-size:26px;font-weight:700;color:var(--ink-soft);line-height:1.45;}
+  .formula{font-size:118px;font-weight:900;color:var(--ink);} .formula .t{color:var(--teal);} .formula .p{color:var(--coral);}
+  .fnote{display:flex;gap:50px;margin-top:40px;justify-content:center;} .fnote div{font-size:30px;font-weight:700;color:var(--ink-soft);} .fnote b{font-weight:900;}
+  .start-screen{position:fixed;inset:0;background:var(--cover);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:30px;}
+  .start-screen .title{font-weight:900;font-size:clamp(48px,5.6vw,104px);color:#fff;} .start-screen .title span{color:var(--gold-lt);}
+  .start-screen .sub{color:rgba(255,255,255,.7);font-size:22px;letter-spacing:.1em;}
+</style>
+</head>
+<body>
+<div class="start-screen" id="startScreen">
+  <div class="title">FTIR 咖啡 <span>PCA</span></div>
+  <div class="sub">紅外光譜食品分析教學影片 · 點擊開始 · 約 5.3 分鐘</div>
+</div>
+<div class="stage" id="stage">
+
+  <!-- P1 封面 -->
+  <div class="slide cover slide-1" data-slide="1">
+    <div class="chapter-chip"><span>01</span> / 14 — 開場</div>
+    <h1>主成分分析 <span class="gold">PCA</span></h1>
+    <div class="uline"></div>
+    <div class="sub-l2">看見咖啡 FTIR 光譜裡的品種指紋</div>
+  </div>
+
+  <!-- P2 FTIR 怎麼測 (T3 SVG 三步流程) -->
+  <div class="slide slide-2" data-slide="2">
+    <div class="chapter-chip"><span>02</span> / 14 — 情境</div>
+    <div class="kick">紅外光譜怎麼測咖啡</div>
+    <div class="slide-title">樣本 → FTIR-DRIFT → 光譜矩陣</div>
+    <div class="content-area">
+      <svg width="1500" height="380" viewBox="0 0 1500 380">
+        <g class="pop d1"><rect x="40" y="120" width="320" height="150" rx="18" fill="#F2EDDC" stroke="#D9D2BE" stroke-width="2"/>
+          <text x="200" y="195" text-anchor="middle" font-size="34" font-weight="900" fill="#1A1A1A" font-family="GenSeki TW">① 咖啡粉樣本</text>
+          <text x="200" y="238" text-anchor="middle" font-size="24" fill="#4a4334" font-family="GenSeki TW">56 支即溶咖啡</text></g>
+        <g class="pop d2"><text x="400" y="205" font-size="64" font-weight="900" fill="var(--coral)" font-family="GenSeki TW">→</text></g>
+        <g class="pop d3"><rect x="500" y="120" width="340" height="150" rx="18" fill="#F2EDDC" stroke="var(--teal)" stroke-width="3"/>
+          <text x="670" y="195" text-anchor="middle" font-size="34" font-weight="900" fill="var(--teal)" font-family="GenSeki TW">② FTIR-DRIFT</text>
+          <text x="670" y="238" text-anchor="middle" font-size="24" fill="#4a4334" font-family="GenSeki TW">紅外光掃過樣本</text></g>
+        <g class="pop d4"><text x="880" y="205" font-size="64" font-weight="900" fill="var(--coral)" font-family="GenSeki TW">→</text></g>
+        <g class="pop d5"><rect x="980" y="120" width="460" height="150" rx="18" fill="#F2EDDC" stroke="#D9D2BE" stroke-width="2"/>
+          <text x="1210" y="190" text-anchor="middle" font-size="34" font-weight="900" fill="#1A1A1A" font-family="GenSeki TW">③ 286 點光譜</text>
+          <text x="1210" y="234" text-anchor="middle" font-size="24" fill="#4a4334" font-family="GenSeki TW">波數 cm⁻¹ × 吸收值</text></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- P3 286 波數難題 (T1 ft01) -->
+  <div class="slide slide-3" data-slide="3">
+    <div class="chapter-chip"><span>03</span> / 14 — 情境</div>
+    <div class="kick">286 個波數的難題</div>
+    <div class="slide-title">56 支咖啡 × 286 個波數</div>
+    <div class="content-area" style="gap:46px;">
+      <div class="figpanel anim d1"><img src="../../python/figures/ft01_raw_spectra.png" alt="raw spectra"></div>
+      <div class="legend" style="max-width:380px;">
+        <div class="lchip pop d2"><span class="dot" style="background:var(--teal)"></span>Arabica · 29 支</div>
+        <div class="lchip pop d3"><span class="dot" style="background:var(--coral)"></span>Robusta · 27 支</div>
+        <div class="lchip anim d4">每條線＝一支咖啡的指紋</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4 SNV (T2 duo ft01->ft02) -->
+  <div class="slide slide-4" data-slide="4">
+    <div class="chapter-chip"><span>04</span> / 14 — 方法</div>
+    <div class="kick">散射校正：SNV</div>
+    <div class="slide-title">讓光譜站上同一基線</div>
+    <div class="content-area">
+      <div class="duo">
+        <figure class="anim d1"><img src="../../python/figures/ft01_raw_spectra.png" alt="raw"><div class="cap a">原始 · 基線飄移</div></figure>
+        <div class="pop d3" style="font-size:60px;font-weight:900;color:var(--coral);">→</div>
+        <figure class="anim d4"><img src="../../python/figures/ft02_snv_spectra.png" alt="snv"><div class="cap b">SNV 後 · 分帶清晰</div></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- P5 PCA 直覺 (T3 SVG 點雲+軸) -->
+  <div class="slide slide-5" data-slide="5">
+    <div class="chapter-chip"><span>05</span> / 14 — 概念</div>
+    <div class="kick">PCA 的直覺</div>
+    <div class="slide-title">找出資料最分散的方向</div>
+    <div class="content-area">
+      <svg width="1100" height="470" viewBox="0 0 1100 470">
+        <g id="cloud"></g>
+        <defs>
+          <marker id="at" markerWidth="12" markerHeight="12" refX="7" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="var(--teal)"/></marker>
+          <marker id="ac" markerWidth="12" markerHeight="12" refX="7" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="var(--coral)"/></marker>
+        </defs>
+        <line class="draw d2" x1="250" y1="320" x2="820" y2="180" stroke="var(--teal)" stroke-width="8" marker-end="url(#at)"/>
+        <line class="draw d4" x1="520" y1="370" x2="430" y2="120" stroke="var(--coral)" stroke-width="7" marker-end="url(#ac)"/>
+        <g class="anim d3"><text x="828" y="175" font-size="30" font-weight="900" fill="var(--teal)" font-family="GenSeki TW">PC1 · 最大分散</text></g>
+        <g class="anim d5"><text x="300" y="110" font-size="28" font-weight="900" fill="var(--coral)" font-family="GenSeki TW">PC2 · 垂直次大</text></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- P6 公式 (T4) -->
+  <div class="slide slide-6" data-slide="6">
+    <div class="chapter-chip"><span>06</span> / 14 — 機制</div>
+    <div class="kick">分數與負荷量</div>
+    <div class="slide-title">PCA 的數學</div>
+    <div class="content-area" style="flex-direction:column;">
+      <div class="formula anim d1">X ≈ <span class="t">T</span> · <span class="p">P<sup style="font-size:.5em">⊤</sup></span></div>
+      <div class="fnote">
+        <div class="anim d2"><b class="hl">分數 T</b>＝每支咖啡的位置</div>
+        <div class="anim d3"><b class="hlc">負荷量 P</b>＝波數如何組成方向</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P7 Scree (T1 ft03) -->
+  <div class="slide slide-7" data-slide="7">
+    <div class="chapter-chip"><span>07</span> / 14 — 機制</div>
+    <div class="kick">要留幾個成分</div>
+    <div class="slide-title">陡坡圖：光譜資訊很集中</div>
+    <div class="content-area" style="gap:46px;">
+      <div class="figpanel anim d1"><img src="../../python/figures/ft03_pca_scree.png" alt="scree"></div>
+      <div class="legend" style="max-width:360px;">
+        <div class="lchip pop d2"><b class="hl" style="font-size:30px;">PC1 = 44.5%</b></div>
+        <div class="lchip pop d3"><b class="hl" style="font-size:30px;">前 2 = 67.6%</b></div>
+        <div class="lchip pop d4"><b class="hlc" style="font-size:30px;">前 3 = 76.3%</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P8 分數圖 (T1 ft04 核心) -->
+  <div class="slide slide-8" data-slide="8">
+    <div class="chapter-chip"><span>08</span> / 14 — 核心</div>
+    <div class="kick">分數圖：品種浮現</div>
+    <div class="slide-title">咖啡，依品種自動分群</div>
+    <div class="content-area" style="gap:46px;">
+      <div class="figpanel anim d1"><img src="../../python/figures/ft04_pca_scores.png" alt="scores"></div>
+      <div class="legend" style="max-width:380px;">
+        <div class="lchip pop d2"><span class="dot" style="background:var(--teal)"></span>Arabica 一群</div>
+        <div class="lchip pop d3"><span class="dot" style="background:var(--coral)"></span>Robusta 另一群</div>
+        <div class="lchip anim d4" style="border-left:8px solid var(--coral);"><b class="hlc">沒看過品種</b>，主要靠 PC2 分</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P9 負荷量 (T2 ft05) -->
+  <div class="slide slide-9" data-slide="9">
+    <div class="chapter-chip"><span>09</span> / 14 — 機制</div>
+    <div class="kick">負荷量回連化學</div>
+    <div class="slide-title">負荷量說的是紅外化學</div>
+    <div class="content-area" style="gap:50px;">
+      <div class="figpanel anim d1"><img src="../../python/figures/ft05_pca_loadings.png" alt="loadings"></div>
+      <div class="lead anim d2" style="max-width:480px;">
+        PC1 貢獻最大的波段在 <b class="hlc">1714 / 1710 / 1706 cm⁻¹</b>，
+        正是<b class="hl">羰基與脂質 C=O</b> 的伸縮振動區——Arabica 與 Robusta 的脂質組成差異，被紅外翻譯出來。
+      </div>
+    </div>
+  </div>
+
+  <!-- P10 指紋區 (T3 SVG) -->
+  <div class="slide slide-10" data-slide="10">
+    <div class="chapter-chip"><span>10</span> / 14 — 概念</div>
+    <div class="kick">什麼是指紋區</div>
+    <div class="slide-title">810–1911 cm⁻¹ 指紋區</div>
+    <div class="content-area">
+      <svg width="1300" height="420" viewBox="0 0 1300 420">
+        <rect class="pop d1" x="360" y="60" width="620" height="250" rx="10" fill="rgba(14,124,123,.10)" stroke="var(--teal)" stroke-dasharray="8,6" stroke-width="2"/>
+        <polyline class="draw d1" points="80,250 200,230 320,255 430,150 520,210 600,120 700,190 800,150 900,240 1000,235 1120,250 1220,245" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+        <line x1="80" y1="330" x2="1220" y2="330" stroke="#1A1A1A" stroke-width="3"/>
+        <g class="anim d3" font-family="GenSeki TW">
+          <text x="670" y="40" text-anchor="middle" font-size="30" font-weight="900" fill="var(--teal)">指紋區 fingerprint region</text>
+          <text x="360" y="360" text-anchor="middle" font-size="24" font-weight="700" fill="#4a4334">810</text>
+          <text x="980" y="360" text-anchor="middle" font-size="24" font-weight="700" fill="#4a4334">1911 cm⁻¹</text>
+        </g>
+        <g class="pop d4" font-family="GenSeki TW" font-weight="900" font-size="26" fill="var(--coral)">
+          <text x="470" y="295">C–O</text><text x="640" y="295">C–C</text><text x="820" y="295">C–N</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- P11 PCA 是/不是 (T5 三卡) -->
+  <div class="slide slide-11" data-slide="11">
+    <div class="chapter-chip"><span>11</span> / 14 — 定位</div>
+    <div class="kick">認清 PCA 的定位</div>
+    <div class="slide-title">PCA 是非監督的</div>
+    <div class="content-area">
+      <div class="cards3">
+        <div class="card anim d1"><h4>非監督</h4><p>不需要任何品種標籤，只看光譜本身。</p></div>
+        <div class="card anim d2"><h4>擅長</h4><p>探索、分群、找異常樣本。</p></div>
+        <div class="card coral anim d3"><h4>不做</h4><p>不直接鑑別這支是 Arabica 還是 Robusta。</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P12 知識地圖 (T3 SVG flow) -->
+  <div class="slide slide-12" data-slide="12">
+    <div class="chapter-chip"><span>12</span> / 14 — 收束</div>
+    <div class="kick">PCA 探索流程全圖</div>
+    <div class="slide-title">光譜 → SNV → PCA → 三產出</div>
+    <div class="content-area">
+      <svg width="1400" height="420" viewBox="0 0 1400 420">
+        <defs><marker id="g" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#8a8270"/></marker></defs>
+        <g class="pop d1"><rect x="30" y="170" width="220" height="90" rx="14" fill="#F2EDDC" stroke="#D9D2BE" stroke-width="2"/><text x="140" y="225" text-anchor="middle" font-size="30" font-weight="900" fill="#1A1A1A" font-family="GenSeki TW">FTIR 光譜</text></g>
+        <line class="draw d2" x1="250" y1="215" x2="320" y2="215" stroke="#8a8270" stroke-width="3" marker-end="url(#g)"/>
+        <g class="pop d2"><rect x="330" y="170" width="180" height="90" rx="14" fill="#F2EDDC" stroke="#D9D2BE" stroke-width="2"/><text x="420" y="225" text-anchor="middle" font-size="30" font-weight="900" fill="#1A1A1A" font-family="GenSeki TW">SNV</text></g>
+        <line class="draw d3" x1="510" y1="215" x2="580" y2="215" stroke="#8a8270" stroke-width="3" marker-end="url(#g)"/>
+        <g class="pop d3"><rect x="590" y="165" width="200" height="100" rx="16" fill="var(--teal)"/><text x="690" y="227" text-anchor="middle" font-size="38" font-weight="900" fill="#fff" font-family="GenSeki TW">PCA</text></g>
+        <line class="draw d4" x1="790" y1="200" x2="900" y2="100" stroke="#8a8270" stroke-width="3" marker-end="url(#g)"/>
+        <line class="draw d4" x1="790" y1="215" x2="900" y2="215" stroke="#8a8270" stroke-width="3" marker-end="url(#g)"/>
+        <line class="draw d4" x1="790" y1="230" x2="900" y2="330" stroke="#8a8270" stroke-width="3" marker-end="url(#g)"/>
+        <g class="pop d5" font-family="GenSeki TW"><rect x="910" y="60" width="240" height="80" rx="14" fill="#F2EDDC" stroke="var(--teal)" stroke-width="2"/><text x="1030" y="110" text-anchor="middle" font-size="28" font-weight="900" fill="var(--teal)">分數 · 分群</text></g>
+        <g class="pop d5" font-family="GenSeki TW"><rect x="910" y="175" width="240" height="80" rx="14" fill="#F2EDDC" stroke="var(--coral)" stroke-width="2"/><text x="1030" y="225" text-anchor="middle" font-size="28" font-weight="900" fill="var(--coral)">負荷量 · 波段</text></g>
+        <g class="pop d6" font-family="GenSeki TW"><rect x="910" y="290" width="240" height="80" rx="14" fill="#F2EDDC" stroke="#D9D2BE" stroke-width="2"/><text x="1030" y="340" text-anchor="middle" font-size="28" font-weight="900" fill="#1A1A1A">陡坡 · 幾個</text></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- P13 金句 (T0 cover) -->
+  <div class="slide cover slide-13" data-slide="13">
+    <div class="chapter-chip"><span>13</span> / 14 — 金句</div>
+    <h1>把 286 個波數<br>壓縮成<span class="gold">看得懂的方向</span></h1>
+    <div class="uline"></div>
+    <div class="sub-l2">這，就是 PCA</div>
+  </div>
+
+  <!-- P14 結尾橋接 (T0 cover) -->
+  <div class="slide cover slide-14" data-slide="14">
+    <div class="chapter-chip"><span>14</span> / 14 — 完</div>
+    <h1>下一支：<span class="gold">PLS-DA</span></h1>
+    <div class="sub-l2">用光譜指紋「鑑別」Arabica vs Robusta</div>
+    <div class="sig">紅外光譜食品分析 · PCA · 完</div>
+  </div>
+
+</div>
+<div class="subtitle-container" id="subtitle">FTIR 把咖啡變成 286 個波數的吸收指紋</div>
+<div class="progress-bar" id="progress-bar"></div>
+<style>.draw{stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.1s ease;}.slide.go .draw{stroke-dashoffset:0;}.draw.d3{transition-delay:.8s}.draw.d4{transition-delay:1.1s}</style>
+<script>
+(function(){
+  const cloud=document.getElementById('cloud');
+  if(cloud){ const g=[['#0E7C7B',[[300,300],[350,270],[290,330],[370,310],[330,350],[260,300]]],
+      ['#E36414',[[560,230],[610,260],[580,200],[640,235],[520,270],[600,300]]]];
+    g.forEach(([c,pts])=>pts.forEach(([x,y])=>{const e=document.createElementNS('http://www.w3.org/2000/svg','circle');e.setAttribute('cx',x);e.setAttribute('cy',y);e.setAttribute('r',16);e.setAttribute('fill',c);e.setAttribute('opacity',.85);cloud.appendChild(e);}));}
+})();
+const PAGES = [
+  { i: 1, dur: 24, sub: "FTIR 把咖啡變成 286 個波數的吸收指紋" },
+  { i: 2, dur: 25, sub: "FTIR 掃描咖啡粉，生成波數 vs 吸收值曲線" },
+  { i: 3, dur: 24, sub: "每支咖啡是 286 維的一點，眼睛看不出來" },
+  { i: 4, dur: 28, sub: "SNV 消除散射基線，光譜站上同一起跑點" },
+  { i: 5, dur: 24, sub: "PC1＝最大分散方向，PC2 與它垂直" },
+  { i: 6, dur: 22, sub: "X ≈ T·Pᵀ：分數看樣本，負荷量看波數" },
+  { i: 7, dur: 26, sub: "PC1=44.5%，前 2 個累積 67.6% 就夠" },
+  { i: 8, dur: 21, sub: "PCA 不看品種，咖啡卻依品種自動分群" },
+  { i: 9, dur: 26, sub: "1714 / 1710 / 1706 cm⁻¹ = 羰基脂質 C=O 振動區" },
+  { i: 10, dur: 26, sub: "810–1911 cm⁻¹ 指紋區：食品獨特的化學簽名" },
+  { i: 11, dur: 22, sub: "PCA 非監督：探索分群找異常，不做鑑別" },
+  { i: 12, dur: 26, sub: "光譜 → SNV → PCA → 分數 / 負荷量 / 陡坡" },
+  { i: 13, dur: 10, sub: "PCA：把 286 個波數，壓縮成看得懂的方向" },
+  { i: 14, dur: 14, sub: "下一支：PLS-DA，從光譜指紋鑑別品種" }
+];
+let accum=0; const TIMINGS=PAGES.map(p=>{const s=accum;accum+=p.dur;return{i:p.i,s,e:accum,sub:p.sub};}); const TOTAL_DUR=accum;
+const slideEls=[...document.querySelectorAll('.slide')]; const subtitleEl=document.getElementById('subtitle');
+let progressBar=null; const startScreen=document.getElementById('startScreen');
+const audio=new Audio("renders/master_audio.mp3"); audio.preload="auto";
+let currentIdx=-1,virtualTime=0,lastTickTime=0,useVirtualTimer=false,isPlaying=false;
+const isRenderMode=new URLSearchParams(location.search).get('render')==='true';
+function tick(){
+  if(!isPlaying)return; let t=0;
+  if(useVirtualTimer||isRenderMode){const now=performance.now();if(lastTickTime===0)lastTickTime=now;const dt=(now-lastTickTime)/1000;lastTickTime=now;virtualTime+=dt;t=virtualTime;}
+  else{t=audio.currentTime;if(audio.paused&&t===0&&lastTickTime>0){const now=performance.now();const dt=(now-lastTickTime)/1000;lastTickTime=now;virtualTime+=dt;t=virtualTime;}else{lastTickTime=performance.now();}}
+  const pb=progressBar||(progressBar=document.getElementById('progress-bar')); if(pb)pb.style.width=(Math.min(t/TOTAL_DUR,1)*100)+'%';
+  const idx=TIMINGS.findIndex(p=>t>=p.s&&t<p.e);
+  if(idx!==-1&&idx!==currentIdx){console.log(`Slide ${idx+1} @ ${t.toFixed(2)}s`);slideEls.forEach((el,i)=>el.classList.toggle('active',i===idx));subtitleEl.textContent=TIMINGS[idx].sub;currentIdx=idx;resetSlideAnimations();}
+  if(currentIdx!==-1){const pageT=t-TIMINGS[currentIdx].s;if(pageT>=0.55)slideEls[currentIdx].classList.add('go');}
+  if(t>=TOTAL_DUR){isPlaying=false;audio.pause();slideEls.forEach(el=>el.classList.remove('active'));slideEls[slideEls.length-1].classList.add('active','go');return;}
+  requestAnimationFrame(tick);
+}
+function resetSlideAnimations(){slideEls.forEach(el=>{el.className='slide slide-'+el.getAttribute('data-slide')+(el.classList.contains('cover')?' cover':'')+(el.classList.contains('active')?' active':'');});}
+startScreen.addEventListener('click',()=>{startScreen.classList.add('hidden');startScreen.style.display='none';isPlaying=true;virtualTime=0;lastTickTime=performance.now();audio.currentTime=0;audio.play().catch(()=>{useVirtualTimer=true;});slideEls[0].classList.add('active');currentIdx=0;resetSlideAnimations();requestAnimationFrame(tick);});
+if(isRenderMode){startScreen.style.display='none';isPlaying=true;virtualTime=0;useVirtualTimer=true;lastTickTime=performance.now();audio.currentTime=0;setTimeout(()=>{audio.play().catch(()=>{});slideEls[0].classList.add('active');currentIdx=0;resetSlideAnimations();requestAnimationFrame(tick);},200);}
+</script>
+</body>
+</html>

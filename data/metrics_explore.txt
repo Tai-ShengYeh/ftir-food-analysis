@@ -1,0 +1,5 @@
+n_samples=56
+n_wavenumbers=286
+wav_min=810.5
+wav_max=1910.6
+variety=Arabica:29, Robusta:27

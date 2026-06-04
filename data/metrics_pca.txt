@@ -1,0 +1,6 @@
+# PCA (SNV + center)
+PC1_var=44.52%  cum=44.52%
+PC2_var=23.09%  cum=67.62%
+PC3_var=8.70%  cum=76.31%
+PC4_var=6.30%  cum=82.61%
+top_PC1_bands_cm-1=1714, 1710, 1706
