@@ -7,7 +7,7 @@ if sys.platform.startswith('win'):
 ROOT = Path(__file__).resolve().parent
 RENDERS = ROOT/"renders"; RENDERS.mkdir(parents=True, exist_ok=True)
 NARR = ROOT/"assets"/"narration"; RECORD = ROOT/"record.cjs"
-PAGES_TIMINGS = [{"i": 1, "dur": 22}, {"i": 2, "dur": 25}, {"i": 3, "dur": 22}, {"i": 4, "dur": 25}, {"i": 5, "dur": 21}, {"i": 6, "dur": 26}, {"i": 7, "dur": 27}, {"i": 8, "dur": 21}, {"i": 9, "dur": 31}, {"i": 10, "dur": 19}, {"i": 11, "dur": 26}, {"i": 12, "dur": 12}, {"i": 13, "dur": 15}]
+PAGES_TIMINGS = [{"i": 1, "dur": 22}, {"i": 2, "dur": 25}, {"i": 3, "dur": 22}, {"i": 4, "dur": 25}, {"i": 5, "dur": 21}, {"i": 6, "dur": 26}, {"i": 7, "dur": 27}, {"i": 8, "dur": 21}, {"i": 9, "dur": 31}, {"i": 10, "dur": 29}, {"i": 11, "dur": 33}, {"i": 12, "dur": 19}, {"i": 13, "dur": 26}, {"i": 14, "dur": 12}, {"i": 15, "dur": 15}]
 def node_env():
     e=os.environ.copy(); e["NODE_PATH"]=os.path.join(e.get("TEMP","C:\\Temp"),"cvs-render","node_modules"); return e
 def master_audio():

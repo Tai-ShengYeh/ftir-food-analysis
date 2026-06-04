@@ -126,6 +126,7 @@ footer{background:var(--cover);color:rgba(255,255,255,.82);}
   <a href="#data">資料</a>
   <a href="#pca">PCA</a>
   <a href="#plsda">PLS-DA</a>
+  <a href="#crosscheck">交叉驗證</a>
   <a href="#python">Python</a>
   <a href="#orange">Orange</a>
   <a href="#summary">總結</a>
@@ -272,6 +273,38 @@ footer{background:var(--cover);color:rgba(255,255,255,.82);}
   </figure>
   <div class="callout coral"><span class="tag">應用：</span>
     把品種換成別的標籤，同一套 PLS-DA 就是食品真偽鑑別的主力——<b>品種鑑別、摻偽偵測、產地溯源</b>。FTIR 給指紋，PLS-DA 給答案。</div>
+</section>
+
+<!-- ===== CROSS-CHECK ===== -->
+<section id="crosscheck">
+  <span class="kicker">交叉驗證 · 真實成分</span>
+  <h2>光譜的差異，是真實的咖啡化學</h2>
+  <p class="lead">FTIR 把 Arabica 和 Robusta 分開了——但這是真的化學差異，還是光譜的巧合？
+  我們換一份<b>完全不同</b>的資料來檢驗：R 語言 <code>pgmm</code> 套件的 <code>coffee</code> 資料，43 支咖啡，
+  直接用濕式化學量了 12 種成分（脂肪、咖啡因、葫蘆巴鹼、綠原酸…）。</p>
+  <div class="grid g2">
+    <figure>
+      <img src="python/figures/ftc01_comp_pca.png" alt="真實成分 PCA">
+      <figcaption>光對這 12 種<span style="color:var(--ink-soft);font-weight:900">真實成分</span>做 PCA，Arabica 與 Robusta 一樣自己分兩群（PC1 37.7%）。</figcaption>
+    </figure>
+    <figure>
+      <img src="python/figures/ftc02_comp_drivers.png" alt="哪些成分在分">
+      <figcaption><b style="color:var(--teal)">脂肪、葫蘆巴鹼</b> Arabica 較高；<b style="color:var(--coral)">咖啡因、綠原酸</b> Robusta 較高——都是公認的品種標記。</figcaption>
+    </figure>
+  </div>
+  <p>用這份真實成分做 PLS-DA，留一法交叉驗證準確率<b>一樣是 100%</b>——和 FTIR 光譜結果完全一致。
+  而且這些「會分」的成分，每一個在紅外光譜裡都有對應吸收：</p>
+  <table>
+    <tr><th>真實成分差異（pgmm）</th><th>哪邊較高</th><th>對應的 FTIR 吸收</th></tr>
+    <tr><td><b>脂肪 Fat</b>（15.4% vs 9.1%）</td><td><b class="teal">Arabica</b></td><td>酯基 C=O ~1745、C–H ~2920 / 2855 cm⁻¹</td></tr>
+    <tr><td><b>咖啡因 Caffeine</b>（1.2% vs 1.9%）</td><td><b class="coral">Robusta</b></td><td>C=O / C=N ~1700–1600 cm⁻¹</td></tr>
+    <tr><td><b>綠原酸類 Chlorogenic acids</b></td><td><b class="coral">Robusta</b></td><td>芳香 C=C、C–O ~1600–1000 cm⁻¹</td></tr>
+    <tr><td><b>葫蘆巴鹼 Trigonelline</b></td><td><b class="teal">Arabica</b></td><td>環 C=N / C–N ~1600–1500 cm⁻¹</td></tr>
+    <tr><td>碳水化合物 / 醣類</td><td>—</td><td><b class="coral">1007 / 957 / 903 cm⁻¹</b>（C–O，PLS-DA 鑑別波段）</td></tr>
+  </table>
+  <div class="callout"><span class="tag">結論：</span>
+    兩份<b>完全不同</b>的資料——一份 FTIR 光譜、一份直接量的化學成分——都把 Arabica 與 Robusta 分得一樣乾淨（皆 100%）。
+    這說明 FTIR 看到的，<b>不是巧合，而是真實、已知的品種化學差異</b>。光譜，是化學的影子。</div>
 </section>
 
 <!-- ===== PYTHON ===== -->

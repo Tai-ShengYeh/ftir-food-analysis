@@ -1,4 +1,4 @@
-// Playwright 錄製（FTIR PLS-DA）· 總片長 292 秒，錄 292.8 秒
+// Playwright 錄製（FTIR PLS-DA）· 總片長 354 秒，錄 354.8 秒
 const { chromium } = require('playwright');
 const path = require('path');
 const DIR = __dirname;
@@ -8,6 +8,6 @@ const DIR = __dirname;
   const page = await context.newPage();
   page.on('console', m=>console.log('PAGE LOG:', m.text())); page.on('pageerror', e=>console.error('PAGE ERROR:', e.stack||e.message));
   await page.goto('file:///'+path.join(DIR,'index.html').replace(/\\/g,'/')+'?render=true');
-  console.log('Recording 292.8 seconds...'); await page.waitForTimeout(292800);
+  console.log('Recording 354.8 seconds...'); await page.waitForTimeout(354800);
   await context.close(); await browser.close(); console.log('Recording completed.');
 })();

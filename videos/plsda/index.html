@@ -46,18 +46,18 @@
 </style>
 </head>
 <body>
-<div class="start-screen" id="startScreen"><div class="title">FTIR 咖啡 <span>PLS-DA</span></div><div class="sub">紅外光譜食品分析教學影片 · 點擊開始 · 約 4.9 分鐘</div></div>
+<div class="start-screen" id="startScreen"><div class="title">FTIR 咖啡 <span>PLS-DA</span></div><div class="sub">紅外光譜食品分析教學影片 · 點擊開始 · 約 5.9 分鐘</div></div>
 <div class="stage" id="stage">
 
   <div class="slide cover slide-1" data-slide="1">
-    <div class="chapter-chip"><span>01</span> / 13 — 開場</div>
+    <div class="chapter-chip"><span>01</span> / 15 — 開場</div>
     <h1><span class="gold">PLS-DA</span></h1>
     <div class="uline"></div>
     <div class="sub-l2">用 FTIR 指紋鑑別 Arabica vs Robusta</div>
   </div>
 
   <div class="slide slide-2" data-slide="2">
-    <div class="chapter-chip"><span>02</span> / 13 — 轉折</div>
+    <div class="chapter-chip"><span>02</span> / 15 — 轉折</div>
     <div class="kick">從探索到鑑別</div>
     <div class="slide-title">PCA 看結構，PLS-DA 做決定</div>
     <div class="content-area" style="gap:40px;">
@@ -68,7 +68,7 @@
   </div>
 
   <div class="slide slide-3" data-slide="3">
-    <div class="chapter-chip"><span>03</span> / 13 — 概念</div>
+    <div class="chapter-chip"><span>03</span> / 15 — 概念</div>
     <div class="kick">兩種方向，兩種目的</div>
     <div class="slide-title">PCA 追分散，PLS-DA 追分界</div>
     <div class="content-area">
@@ -85,7 +85,7 @@
   </div>
 
   <div class="slide slide-4" data-slide="4">
-    <div class="chapter-chip"><span>04</span> / 13 — 機制</div>
+    <div class="chapter-chip"><span>04</span> / 15 — 機制</div>
     <div class="kick">PLS-DA 的想法</div>
     <div class="slide-title">最大化光譜與類別的共變異</div>
     <div class="content-area" style="flex-direction:column;">
@@ -98,7 +98,7 @@
   </div>
 
   <div class="slide slide-5" data-slide="5">
-    <div class="chapter-chip"><span>05</span> / 13 — 核心</div>
+    <div class="chapter-chip"><span>05</span> / 15 — 核心</div>
     <div class="kick">監督式分數圖</div>
     <div class="slide-title">LV1 乾淨分開兩品種</div>
     <div class="content-area" style="gap:46px;">
@@ -112,7 +112,7 @@
   </div>
 
   <div class="slide slide-6" data-slide="6">
-    <div class="chapter-chip"><span>06</span> / 13 — 機制</div>
+    <div class="chapter-chip"><span>06</span> / 15 — 機制</div>
     <div class="kick">誠實驗證</div>
     <div class="slide-title">交叉驗證：別用考過的題目考自己</div>
     <div class="content-area" style="flex-direction:column;gap:30px;">
@@ -130,7 +130,7 @@
   </div>
 
   <div class="slide slide-7" data-slide="7">
-    <div class="chapter-chip"><span>07</span> / 13 — 機制</div>
+    <div class="chapter-chip"><span>07</span> / 15 — 機制</div>
     <div class="kick">要幾個潛在變量</div>
     <div class="slide-title">夠用就好，別過度擬合</div>
     <div class="content-area" style="gap:46px;">
@@ -144,7 +144,7 @@
   </div>
 
   <div class="slide slide-8" data-slide="8">
-    <div class="chapter-chip"><span>08</span> / 13 — 成績</div>
+    <div class="chapter-chip"><span>08</span> / 15 — 成績</div>
     <div class="kick">交叉驗證下的成績單</div>
     <div class="slide-title">混淆矩陣：對角線全中</div>
     <div class="content-area" style="gap:46px;">
@@ -158,7 +158,7 @@
   </div>
 
   <div class="slide slide-9" data-slide="9">
-    <div class="chapter-chip"><span>09</span> / 13 — 機制</div>
+    <div class="chapter-chip"><span>09</span> / 15 — 機制</div>
     <div class="kick">哪些波段在分類</div>
     <div class="slide-title">回歸係數回連咖啡化學</div>
     <div class="content-area" style="gap:50px;">
@@ -171,7 +171,34 @@
   </div>
 
   <div class="slide slide-10" data-slide="10">
-    <div class="chapter-chip"><span>10</span> / 13 — 應用</div>
+    <div class="chapter-chip"><span>10</span> / 15 — 交叉驗證</div>
+    <div class="kick">用真實成分檢驗</div>
+    <div class="slide-title">換一份「真實成分」資料</div>
+    <div class="content-area" style="gap:46px;">
+      <div class="figpanel anim d1"><img src="../../python/figures/ftc01_comp_pca.png" alt="composition pca"></div>
+      <div class="legend" style="max-width:400px;">
+        <div class="lchip pop d2">pgmm 套件 · 43 支咖啡</div>
+        <div class="lchip pop d3">直接量 12 種成分（脂肪、咖啡因…）</div>
+        <div class="lchip anim d4" style="border-left:8px solid var(--teal);">PCA <b class="hl">也把兩品種分開</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide slide-11" data-slide="11">
+    <div class="chapter-chip"><span>11</span> / 15 — 對應</div>
+    <div class="kick">光譜差異＝真實成分差異</div>
+    <div class="slide-title">光譜的差異，對得上真實成分</div>
+    <div class="content-area" style="gap:50px;">
+      <div class="figpanel anim d1"><img src="../../python/figures/ftc02_comp_drivers.png" alt="drivers"></div>
+      <div class="lead anim d2" style="max-width:480px;">
+        Arabica 高：<b class="hl">脂肪、葫蘆巴鹼</b>；Robusta 高：<b class="hlc">咖啡因、綠原酸</b>。都是公認的品種標記，也都有紅外吸收。<br>
+        用真實成分做 PLS-DA，交叉驗證<b class="hlc">一樣 100%</b>——FTIR 看到的，是真實咖啡化學。
+      </div>
+    </div>
+  </div>
+
+  <div class="slide slide-12" data-slide="12">
+    <div class="chapter-chip"><span>12</span> / 15 — 應用</div>
     <div class="kick">這套方法能做什麼</div>
     <div class="slide-title">從分類，到食品真偽鑑別</div>
     <div class="content-area">
@@ -183,8 +210,8 @@
     </div>
   </div>
 
-  <div class="slide slide-11" data-slide="11">
-    <div class="chapter-chip"><span>11</span> / 13 — 收束</div>
+  <div class="slide slide-13" data-slide="13">
+    <div class="chapter-chip"><span>13</span> / 15 — 收束</div>
     <div class="kick">兩種工具，一條流程</div>
     <div class="slide-title">PCA ↔ PLS-DA 知識地圖</div>
     <div class="content-area">
@@ -200,15 +227,15 @@
     </div>
   </div>
 
-  <div class="slide cover slide-12" data-slide="12">
-    <div class="chapter-chip"><span>12</span> / 13 — 金句</div>
+  <div class="slide cover slide-14" data-slide="14">
+    <div class="chapter-chip"><span>14</span> / 15 — 金句</div>
     <h1>讓 FTIR 指紋<br>說出這是 <span class="gold">Arabica 還是 Robusta</span></h1>
     <div class="uline"></div>
     <div class="sub-l2">這，就是 PLS-DA</div>
   </div>
 
-  <div class="slide cover slide-13" data-slide="13">
-    <div class="chapter-chip"><span>13</span> / 13 — 完</div>
+  <div class="slide cover slide-15" data-slide="15">
+    <div class="chapter-chip"><span>15</span> / 15 — 完</div>
     <h1>接下來：<span class="gold">用 Orange 親手做</span></h1>
     <div class="sub-l2">不寫一行程式，把 PCA + PLS-DA 拉一遍</div>
     <div class="sig">紅外光譜食品分析 · PLS-DA · 完</div>
@@ -234,10 +261,12 @@ const PAGES = [
   { i: 7, dur: 27, sub: "1 LV 已 98.2%，2 LV 就 100%，夠用就好" },
   { i: 8, dur: 21, sub: "對角線全中，56 支咖啡完美鑑別" },
   { i: 9, dur: 31, sub: "1007 / 957 / 903 cm⁻¹ = 醣類 C–O 區，化學有意義" },
-  { i: 10, dur: 19, sub: "品種、摻偽、產地——都靠 PLS-DA" },
-  { i: 11, dur: 26, sub: "先用 PCA 探索，再用 PLS-DA 鑑別" },
-  { i: 12, dur: 12, sub: "PLS-DA：讓 FTIR 指紋說出這是哪個品種" },
-  { i: 13, dur: 15, sub: "接下來：用 Orange 親手做一次" }
+  { i: 10, dur: 29, sub: "換真實成分資料：PCA 也把兩品種分開" },
+  { i: 11, dur: 33, sub: "脂肪↑Arabica、咖啡因↑Robusta，成分 PLS-DA 也 100%" },
+  { i: 12, dur: 19, sub: "品種、摻偽、產地——都靠 PLS-DA" },
+  { i: 13, dur: 26, sub: "先用 PCA 探索，再用 PLS-DA 鑑別" },
+  { i: 14, dur: 12, sub: "PLS-DA：讓 FTIR 指紋說出這是哪個品種" },
+  { i: 15, dur: 15, sub: "接下來：用 Orange 親手做一次" }
 ];
 let accum=0; const TIMINGS=PAGES.map(p=>{const s=accum;accum+=p.dur;return{i:p.i,s,e:accum,sub:p.sub};}); const TOTAL_DUR=accum;
 const slideEls=[...document.querySelectorAll('.slide')]; const subtitleEl=document.getElementById('subtitle');
