@@ -5,6 +5,18 @@
 
 🔗 **線上教材（GitHub Pages）**：<https://tai-shengyeh.github.io/ftir-food-analysis/>
 
+## 🔗 同主題搭配課程（咖啡真偽鑑別）
+
+同樣以「咖啡」為案例、不同分析角度，可串成一條教學線：
+
+| 課程 | 技術 / 方法 | 課程頁 |
+|------|------------|--------|
+| **FTIR（本課）** | 中紅外 MIR + PCA + PLS-DA | — |
+| 咖啡化學成分 | 12 種成分 + PCA + GMM 集群 | [↗](https://tai-shengyeh.github.io/coffee_pgmm_R_code/coffee_pgmm.html) |
+| Benchtop NMR | 桌上型 NMR + PCA + PLS + PLS-DA（16-OMC 摻假）| [↗](https://tai-shengyeh.github.io/benchtop-nmr-coffee/teaching.html) |
+
+🏠 課程總入口：<https://tai-shengyeh.github.io/>
+
 ---
 
 ## 這個專案在做什麼
