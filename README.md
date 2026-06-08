@@ -14,6 +14,7 @@
 | **FTIR（本課）** | 中紅外 MIR + PCA + PLS-DA | — |
 | 咖啡化學成分 | 12 種成分 + PCA + GMM 集群 | [↗](https://tai-shengyeh.github.io/coffee_pgmm_R_code/coffee_pgmm.html) |
 | Benchtop NMR | 桌上型 NMR + PCA + PLS + PLS-DA（16-OMC 摻假）| [↗](https://tai-shengyeh.github.io/benchtop-nmr-coffee/teaching.html) |
+| GC 氣相層析 | GC 層析 + PCA + PLS-DA | [↗](https://tai-shengyeh.github.io/coffee-gc-analysis/teaching.html) |
 
 🏠 課程總入口：<https://tai-shengyeh.github.io/>
 
