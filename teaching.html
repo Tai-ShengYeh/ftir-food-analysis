@@ -129,6 +129,7 @@ footer{background:var(--cover);color:rgba(255,255,255,.82);}
   <a href="#crosscheck">交叉驗證</a>
   <a href="#python">Python</a>
   <a href="#orange">Orange</a>
+  <a href="#lit">文獻</a>
   <a href="#summary">總結</a>
 </nav>
 
@@ -386,6 +387,59 @@ python 03_plsda.py       # 監督分數 / 選 LV / 混淆矩陣 / 鑑別係數
     <a class="btn" href="orange/coffee_ftir_workflow.ows">⬇ 下載 .ows 工作流程</a>
     <a class="btn coral" href="orange/ORANGE_GUIDE.md">📖 Orange 圖解步驟指南</a>
   </div>
+</section>
+
+<!-- ===== LITERATURE ===== -->
+<section id="lit">
+  <span class="kicker">學術文獻 · 參考比對</span>
+  <h2>把 FTIR 的脂質訊號，接回 GC 的脂肪酸數字</h2>
+  <p class="lead">本頁的 FTIR 是<b>非目標式</b>振動指紋，PC1 主要落在<b>羰基／脂質 C=O（~1714–1706 cm⁻¹）</b>區。那「脂質差異」具體是哪些分子？兩篇用 <b>GC 測脂肪酸</b> 的同儕審查研究給了答案，正好和本頁的「交叉驗證」段落互相印證。</p>
+  <div class="grid g2">
+    <div class="card">
+      <h4>Martín 等 (2001) · Talanta</h4>
+      <p>毛細管 GC-FID 測 <b>40 支</b>咖啡（27 Arabica / 13 Robusta，生豆＋烘焙豆）的 <b>10 種脂肪酸</b>，以 PCA + LDA 判別：</p>
+      <ul>
+        <li>PCA PC1 <b>40.7%</b>；主要判別成分為油酸 (C18:1)、次亞麻油酸 (C18:3)、亞麻油酸 (C18:2)、肉豆蔻酸 (C14:0)</li>
+        <li>「油酸 vs 次亞麻油酸」散布圖即可<b>完全分開</b>兩品種</li>
+        <li>LDA 品種辨識率 <b>100%</b></li>
+      </ul>
+    </div>
+    <div class="card coral">
+      <h4>Romano 等 (2014) · J. Food Compos. Anal.</h4>
+      <p>更進一步——以 HRGC/FID 脂肪酸標記<b>定量混合比例</b>防摻假：</p>
+      <ul>
+        <li>標記：ΣMUFA、次亞麻油酸 (18:3n-3)、18:0/18:1 比值、ΣMUFA/ΣSFA</li>
+        <li>PCA PC1 <b>97.56%</b>；標記與 Arabica 含量的線性迴歸 <b>r=0.98</b></li>
+        <li>能抓出<b>標示與實際不符</b>的市售咖啡（如標 80%、實測約 58%）</li>
+      </ul>
+    </div>
+  </div>
+  <h3>關鍵化學：Arabica 與 Robusta 的脂肪酸差異</h3>
+  <table>
+    <tr><th>脂肪酸</th><th>Arabica</th><th>Robusta</th><th>判別意義</th></tr>
+    <tr><td>油酸 Oleic (C18:1)</td><td>~7.7–8.3%</td><td><b class="coral">~12.1–12.3%</b></td><td>Robusta 明顯較高</td></tr>
+    <tr><td>次亞麻油酸 Linolenic (C18:3)</td><td><b class="teal">~1.4–1.5%</b></td><td>~0.7–0.9%</td><td>Arabica 較高</td></tr>
+    <tr><td>亞麻油酸 Linoleic (C18:2)</td><td>~43.6%</td><td>~39.3%</td><td>主成分、Arabica 略高</td></tr>
+    <tr><td>棕櫚酸 Palmitic (C16:0)</td><td>~33–36%</td><td>~36%</td><td>主要飽和脂肪酸</td></tr>
+  </table>
+  <p class="codecap" style="margin-bottom:0">數值整理自 Martín 等 (2001) 與 Romano 等 (2014)。本頁 PC1 的 C=O／C–H 脂質吸收，反映的正是這些脂肪酸的總體差異——FTIR 看「整體脂質」，GC 解析「個別脂肪酸」。</p>
+  <div class="callout"><span class="tag">三條獨立證據，同一結論：</span>
+    本頁（FTIR 光譜）、「交叉驗證」段（濕式化學成分）、與這兩篇（GC 脂肪酸）——都把 Arabica / Robusta 分得一樣乾淨。FTIR 的優勢是<b>快、整譜、免前處理</b>；GC-FAME 的優勢是<b>分子層級、可定量</b>。互補而非取代。</div>
+  <table>
+    <tr><th>面向</th><th>本頁 FTIR</th><th>Martín 2001</th><th>Romano 2014</th></tr>
+    <tr><td>測什麼</td><td>286 波數（整譜）</td><td>10 種脂肪酸</td><td>脂肪酸 + 比值標記</td></tr>
+    <tr><td>樣本數</td><td>56 即溶咖啡</td><td>40</td><td>11 純品 + 多組混合</td></tr>
+    <tr><td>方法</td><td>PCA + PLS-DA</td><td>PCA + LDA</td><td>PCA + 多元迴歸</td></tr>
+    <tr><td>目標</td><td>分類 A / R</td><td>分類 A / R（＋生／熟）</td><td><b class="coral">定量混合比例</b></td></tr>
+    <tr><td>關鍵結果</td><td>5 折 CV 100%</td><td>LDA 100%</td><td>r=0.98、抓出標示不符</td></tr>
+  </table>
+  <div class="callout coral"><span class="tag">延伸思考：</span>
+    本頁停在「Arabica 還是 Robusta」（二元分類）；Romano 等 (2014) 用脂肪酸標記<b>定量混合比例</b>、抓出標示不符的市售咖啡——把分類升級成真偽與摻假定量，也是 FTIR + 化學計量學常見的下一步。</div>
+  <h3>引用文獻</h3>
+  <p style="font-size:14.5px;color:var(--ink-soft)">
+    1. Martín, M.J., Pablos, F., González, A.G., Valdenebro, M.S., León-Camacho, M. (2001). <i>Fatty acid profiles as discriminant parameters for coffee varieties differentiation.</i> <b>Talanta</b> 54(2), 291–297.<br>
+    2. Romano, R., Santini, A., Le Grottaglie, L., Manzo, N., Visconti, A., Ritieni, A. (2014). <i>Identification markers based on fatty acid composition to differentiate between roasted Arabica and Canephora (Robusta) coffee varieties in mixtures.</i> <b>Journal of Food Composition and Analysis</b> 35(1), 1–9.
+  </p>
 </section>
 
 <!-- ===== SUMMARY ===== -->
